@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Newspaper Request Form – Test</title>
+<style>body{margin:0;padding:40px 16px;background:#fafafa;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}</style>
+</head>
+<body>
+<!-- ===== Newspaper Request Form (Webflow Embed) ===== -->
+<style>
+#npf{--npf-border:#d9d9d9;--npf-text:#1a1a1a;--npf-muted:#6b6b6b;--npf-bg:#fff;--npf-focus:#1a1a1a;--npf-err:#c62828;--npf-ok:#2e7d32;max-width:760px;margin:0 auto;color:var(--npf-text);font-family:inherit;box-sizing:border-box}
+#npf *,#npf *::before,#npf *::after{box-sizing:border-box}
+#npf h3{font-size:18px;font-weight:500;margin:0 0 18px}
+#npf h4{font-size:17px;font-weight:600;margin:0 0 14px}
+#npf .npf-row{display:grid;grid-template-columns:1fr 1fr;gap:8px 10px}
+#npf .npf-field{margin-bottom:14px}
+#npf label{display:block;font-size:14px;margin-bottom:6px}
+#npf input,#npf select{width:100%;height:40px;padding:0 16px;border:1px solid var(--npf-border);border-radius:999px;background:var(--npf-bg);font:inherit;font-size:14px;color:var(--npf-text);outline:none;transition:border-color .15s}
+#npf select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' stroke='%23555' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:40px}
+#npf select:invalid{color:#999}
+#npf input::placeholder{color:#999}
+#npf input:focus,#npf select:focus{border-color:var(--npf-focus)}
+#npf .npf-invalid{border-color:var(--npf-err)!important}
+#npf .npf-hr{border:0;border-top:1px solid #e5e5e5;margin:10px 0 26px}
+#npf .npf-child{padding-bottom:6px;margin-bottom:10px}
+#npf .npf-child+.npf-child{border-top:1px dashed #e5e5e5;padding-top:18px}
+#npf .npf-child-head{display:flex;justify-content:space-between;align-items:center}
+#npf .npf-remove{background:none;border:0;color:var(--npf-err);font:inherit;font-size:14px;cursor:pointer;padding:4px 0;margin-bottom:14px}
+#npf .npf-remove:hover{text-decoration:underline}
+#npf .npf-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;height:40px;border-radius:999px;font:inherit;font-size:14px;cursor:pointer;transition:background .15s,border-color .15s}
+#npf .npf-add{background:var(--npf-bg);border:1px solid var(--npf-border);color:var(--npf-text);margin-bottom:12px}
+#npf .npf-add:hover{border-color:var(--npf-focus)}
+#npf .npf-add:disabled{opacity:.5;cursor:not-allowed}
+#npf .npf-submit{background:#1a1a1a;border:1px solid #1a1a1a;color:#fff}
+#npf .npf-submit:hover{background:#333}
+#npf .npf-submit:disabled{background:#f0f0f0;border-color:#f0f0f0;color:#888;cursor:not-allowed}
+#npf .npf-msg{font-size:14px;margin-top:12px;min-height:20px}
+#npf .npf-msg.err{color:var(--npf-err)}
+#npf .npf-success{text-align:center;padding:40px 16px}
+#npf .npf-success h3{color:var(--npf-ok)}
+#npf .npf-success p{color:var(--npf-muted);margin:0 0 20px}
+#npf .npf-hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden}
+@media (max-width:560px){#npf .npf-row{grid-template-columns:1fr}}
+</style>
+
+<div id="npf">
+  <form id="npf-form" novalidate>
+    <h3>Parent or Guardian</h3>
+    <div class="npf-row">
+      <div class="npf-field"><label for="npf-pfn">First name</label><input id="npf-pfn" name="parentFirst" placeholder="First name" autocomplete="given-name" required maxlength="80"></div>
+      <div class="npf-field"><label for="npf-pln">Last name</label><input id="npf-pln" name="parentLast" placeholder="Last name" autocomplete="family-name" required maxlength="80"></div>
+    </div>
+    <div class="npf-field">
+      <label for="npf-street">Mailing address</label>
+      <input id="npf-street" name="street" placeholder="Street address" autocomplete="address-line1" required maxlength="150">
+    </div>
+    <div class="npf-field">
+      <input id="npf-apt" name="apt" placeholder="Apartment / Unit (optional)" autocomplete="address-line2" maxlength="60" aria-label="Apartment or unit">
+    </div>
+    <div class="npf-row">
+      <div class="npf-field"><label for="npf-city">City</label><input id="npf-city" name="city" placeholder="City" autocomplete="address-level2" required maxlength="80"></div>
+      <div class="npf-field"><label for="npf-state">State</label><input id="npf-state" name="state" placeholder="State" autocomplete="address-level1" required maxlength="40"></div>
+    </div>
+    <div class="npf-field">
+      <label for="npf-zip">ZIP code</label>
+      <input id="npf-zip" name="zip" placeholder="ZIP code" autocomplete="postal-code" inputmode="numeric" required maxlength="10">
+    </div>
+
+    <!-- Honeypot (spam trap, keep hidden) -->
+    <div class="npf-hp" aria-hidden="true"><input name="website" tabindex="-1" autocomplete="off"></div>
+
+    <hr class="npf-hr">
+    <h3>Children Receiving Copies</h3>
+    <div id="npf-children"></div>
+
+    <button type="button" class="npf-btn npf-add" id="npf-add"><span aria-hidden="true">+</span> Add Another Child</button>
+    <button type="submit" class="npf-btn npf-submit" id="npf-submit">Submit Request</button>
+    <div class="npf-msg" id="npf-msg" role="alert"></div>
+  </form>
+
+  <div class="npf-success" id="npf-success" hidden>
+    <h3>Thank you! Your request has been received.</h3>
+    <p>We'll mail the newspaper to the address you provided.</p>
+    <button type="button" class="npf-btn npf-add" id="npf-again" style="max-width:280px;margin:0 auto">Submit Another Request</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  /* ===== SETTINGS: edit these ===== */
+  var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyK3AEXOcc0KHw2y7xQMkV9B18N6sRdATWIX6j-dBAcampm1zcCTxAolUiwVeSTI5M/exec";
+  var GRADES = ["Pre-K","Kindergarten","1st Grade","2nd Grade","3rd Grade","4th Grade","5th Grade","6th Grade","7th Grade","8th Grade","9th Grade","10th Grade","11th Grade","12th Grade"];
+  var MAX_CHILDREN = 10;
+  /* ================================ */
+
+  var form = document.getElementById("npf-form");
+  var list = document.getElementById("npf-children");
+  var addBtn = document.getElementById("npf-add");
+  var submitBtn = document.getElementById("npf-submit");
+  var msg = document.getElementById("npf-msg");
+  var success = document.getElementById("npf-success");
+  var uid = 0;
+
+  function gradeOptions() {
+    var html = '<option value="" disabled selected>Select grade</option>';
+    GRADES.forEach(function (g) { html += '<option value="' + g + '">' + g + '</option>'; });
+    return html;
+  }
+
+  function addChild() {
+    if (list.children.length >= MAX_CHILDREN) return;
+    uid++;
+    var el = document.createElement("div");
+    el.className = "npf-child";
+    el.innerHTML =
+      '<div class="npf-child-head"><h4 class="npf-child-title"></h4>' +
+      '<button type="button" class="npf-remove">Remove</button></div>' +
+      '<div class="npf-row">' +
+        '<div class="npf-field"><label for="npf-cfn' + uid + '">First name</label><input id="npf-cfn' + uid + '" data-k="first" placeholder="First name" required maxlength="80"></div>' +
+        '<div class="npf-field"><label for="npf-cln' + uid + '">Last name</label><input id="npf-cln' + uid + '" data-k="last" placeholder="Last name" required maxlength="80"></div>' +
+      '</div>' +
+      '<div class="npf-field"><label for="npf-cg' + uid + '">Grade level</label><select id="npf-cg' + uid + '" data-k="grade" required>' + gradeOptions() + '</select></div>';
+    el.querySelector(".npf-remove").addEventListener("click", function () { el.remove(); refresh(); });
+    list.appendChild(el);
+    refresh();
+  }
+
+  function refresh() {
+    var kids = list.querySelectorAll(".npf-child");
+    kids.forEach(function (k, i) {
+      k.querySelector(".npf-child-title").textContent = "Child " + (i + 1);
+      k.querySelector(".npf-remove").hidden = kids.length === 1;
+    });
+    addBtn.disabled = kids.length >= MAX_CHILDREN;
+  }
+
+  function validate() {
+    var ok = true;
+    form.querySelectorAll("[required]").forEach(function (f) {
+      var bad = !f.value.trim();
+      f.classList.toggle("npf-invalid", bad);
+      if (bad) ok = false;
+    });
+    var zip = form.zip;
+    if (zip.value.trim() && !/^\d{5}(-\d{4})?$/.test(zip.value.trim())) { zip.classList.add("npf-invalid"); ok = false; }
+    return ok;
+  }
+
+  form.addEventListener("input", function (e) { e.target.classList.remove("npf-invalid"); msg.textContent = ""; });
+  form.addEventListener("change", function (e) { e.target.classList.remove("npf-invalid"); });
+  addBtn.addEventListener("click", addChild);
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    msg.className = "npf-msg"; msg.textContent = "";
+    if (!validate()) {
+      msg.className = "npf-msg err";
+      msg.textContent = "Please fill in all required fields (ZIP must be 5 digits).";
+      var first = form.querySelector(".npf-invalid"); if (first) first.focus();
+      return;
+    }
+    var v = function (n) { return form[n].value.trim(); };
+    var payload = {
+      website: form.website.value,
+      parent: { firstName: v("parentFirst"), lastName: v("parentLast") },
+      address: { street: v("street"), apt: v("apt"), city: v("city"), state: v("state"), zip: v("zip") },
+      children: Array.prototype.map.call(list.querySelectorAll(".npf-child"), function (k) {
+        return {
+          firstName: k.querySelector('[data-k="first"]').value.trim(),
+          lastName: k.querySelector('[data-k="last"]').value.trim(),
+          grade: k.querySelector('[data-k="grade"]').value
+        };
+      })
+    };
+
+    submitBtn.disabled = true; submitBtn.textContent = "Submitting...";
+    fetch(SCRIPT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload)
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (res) {
+        if (!res.ok) throw new Error(res.error || "Submission failed");
+        form.hidden = true; success.hidden = false;
+        success.scrollIntoView({ behavior: "smooth", block: "center" });
+      })
+      .catch(function () {
+        msg.className = "npf-msg err";
+        msg.textContent = "Something went wrong. Please try again in a moment.";
+      })
+      .finally(function () { submitBtn.disabled = false; submitBtn.textContent = "Submit Request"; });
+  });
+
+  document.getElementById("npf-again").addEventListener("click", function () {
+    form.reset(); list.innerHTML = ""; addChild();
+    success.hidden = true; form.hidden = false;
+  });
+
+  addChild();
+})();
+</script>
+<!-- ===== /Newspaper Request Form ===== -->
+
+</body>
+</html>
